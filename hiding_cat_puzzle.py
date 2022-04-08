@@ -14,6 +14,10 @@ class Cat_Puzzle:
             self.__verbose = verbose if type(verbose) == bool else True
             self.__total_boxes = self.__get_total_boxes(total_boxes)
             self.__prepare_game()
+            if self.__verbose:
+                print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
+                if debug:
+                    print(f"(The projected solution should consistently take {2 * self.__total_boxes - 4} turns)")
             if not debug:
                 self.__start_game()
 
@@ -65,8 +69,6 @@ class Cat_Puzzle:
 
     #Start the game
     def __start_game(self):
-        if self.__verbose:
-            print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
         while self.__game_not_solved:
             self.take_turn()
         if self.__verbose:
