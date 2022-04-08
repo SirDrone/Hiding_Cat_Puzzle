@@ -10,17 +10,10 @@ if __name__ == '__main__':
     total_boxes = 5 #You can also change this value to a number greater than 2.  I recommend 5 or 7 for scale
     verbose = True #You can also change this value between True and False
 
-    #Now to begin the game based on our choices:
-    if verbose:
-        print("Welcome to the Cat Puzzle game!  This challenge stems from a Microsoft/Google interview riddle.\n" \
-                "The puzzle is simple.  There is a cat who loves boxes, and you, as the player, " \
-                "get a prize for picking the box with the cat in it.\n" \
-                "However, each day, the cat will move to an adjacent box, " \
-                "and the owner only lets you pick one box per day, with a small fee charged each day you play.\n" \
-                "What strategies can you use to find the cat and win the prize consistently in the fewest number of days, " \
-                "and minimize the overall toll?\n")
 
-    #The absurd mode automatically sets up a worst-case scenario game (but only for 5 boxes, feel free to change that)
+    #########################################################################################################
+
+    #The absurd mode automatically sets up a worst-case scenario game (feel free to change total_boxes)
     if player_mode == "absurd":
         puzzle = Cat_Puzzle(mode='A', total_boxes=total_boxes, verbose=verbose)
 
