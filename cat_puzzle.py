@@ -2,7 +2,7 @@
 
 from random import choice
 
-#This class contains the functionality necessary to try one's hand at the Microsoft Interview Cat Puzzle!
+#This class contains the functionality necessary to try one's hand at the Microsoft/Google interview Cat Puzzle!
 #The puzzle is simple.  There is a cat who loves boxes, and you, as the player, get a prize for picking the box with the cat in it.
 #However, each day, the cat will move to an adjacent box, and the owner only lets you pick one box per day, charging a small toll for each attempt.
 #What strategies can you use to find the cat and win the prize in the fewest number of days, and minimize the overall toll?
@@ -38,7 +38,7 @@ class Cat_Puzzle:
                     f"(Enter an integer from 1 to {self.__total_boxes})\n")
         return int(guessed_box)
 
-    #Determine if number provided (guessed_box or total total_boxes) checks out
+    #Determine if number provided (guessed_box or total_boxes) checks out
     def __acceptable(self, num, min_num=0, max_num=0):
         try:
             if int(num) > min_num:
