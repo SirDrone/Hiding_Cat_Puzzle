@@ -27,7 +27,7 @@ class Cat_Puzzle:
                         "and minimize the overall toll?\n")
                 print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
                 if debug:
-                    print(f"(The projected solution should consistently take {2 * self.__total_boxes - 4} turns)")
+                    print(f"(The projected optimal solution should consistently take at most {2 * self.__total_boxes - 4} turns)")
             if not debug:
                 self.__start_game()
 
