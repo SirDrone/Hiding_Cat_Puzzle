@@ -1,4 +1,4 @@
-# Cat_Puzzle
+# Hiding_Cat_Puzzle
 A recreation of a tech interview question purportedly posed by Microsoft/Google.
 
 ### The puzzle:
