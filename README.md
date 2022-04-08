@@ -1,7 +1,7 @@
 # Cat_Puzzle
-A recreation of a coding interview question purportedly posed by Microsoft/Google
+A recreation of a coding interview question purportedly posed by Microsoft/Google.
 
-The puzzle goes that there is a cat among a row of boxes.
+The puzzle goes that there is a cat among a row of boxes (though another version uses doors).
 Each day, we are allowed to pick one of the boxes to see if the cat is inside.
 If we're right, we win!  If not, the cat will move to a box adjacent to the one it was actually in, and we have to come back the next day to find it.
 Our goal is to reliably decipher a solution where, even in the worst-case, we can minimize the number of days necessary to find the cat.
@@ -34,5 +34,6 @@ Our goal is to reliably decipher a solution where, even in the worst-case, we ca
 - This is but a terminal/command line program
 - This program does not intend to solve the challenge itself, merely recreate it for easier solving or analysis
 
-### Feeling completely stumped at finding a consistent solution?  There is a great guide posted here if you yield:
-- https://mindyourdecisions.com/blog/2017/07/09/can-you-solve-the-hiding-cat-puzzle-tech-interview-question
+### Feeling completely stumped at finding a consistent solution?
+- There is a great guide posted here if you yield:
+    - https://mindyourdecisions.com/blog/2017/07/09/can-you-solve-the-hiding-cat-puzzle-tech-interview-question
