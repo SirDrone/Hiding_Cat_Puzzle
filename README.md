@@ -1,7 +1,7 @@
 # Cat_Puzzle
 A recreation of a tech interview question purportedly posed by Microsoft/Google.
 
-The puzzle goes that:
+### The puzzle:
 - There is a cat among a row of boxes (though another version uses doors).
 - Each day, we are allowed to pick one of the boxes to see if the cat is inside.
 - If we're right, we win!  If not, the cat will move to a box adjacent to the one it was actually in, and we have to come back the next day to find it.
