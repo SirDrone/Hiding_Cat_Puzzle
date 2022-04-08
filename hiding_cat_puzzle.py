@@ -15,6 +15,16 @@ class Cat_Puzzle:
             self.__total_boxes = self.__get_total_boxes(total_boxes)
             self.__prepare_game()
             if self.__verbose:
+                print("Welcome to the Cat Puzzle game!  " \
+                        "This challenge stems from a Microsoft/Google interview riddle.\n" \
+                        "The puzzle is simple.  There is a cat who loves boxes, and you, " \
+                        "as the player get a prize for picking the box with the cat in it.\n" \
+                        "However, each day, the cat will move to an adjacent box, " \
+                        "and the owner only lets you pick one box per day, " \
+                        "with a small fee charged each day you play.\n" \
+                        "What strategies can you use to find the cat " \
+                        "and win the prize consistently in the fewest number of days, " \
+                        "and minimize the overall toll?\n")
                 print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
                 if debug:
                     print(f"(The projected solution should consistently take {2 * self.__total_boxes - 4} turns)")
