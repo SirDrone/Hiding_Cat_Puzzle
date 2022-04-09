@@ -7,20 +7,21 @@ if __name__ == '__main__':
 
     #Values you can change:
     player_mode = "absurd" #You can change this value between 'absurd', 'debug', or 'custom'
-    total_boxes = 5 #You can also change this value to a number greater than 2.  I recommend 5 or 7 for scale
+    total_boxes =  5 #You can also change this value to a number greater than 2.  I recommend 5 or 7 for scale
     verbose = True #You can also change this value between True and False
+    zero_pad = True #This value will pad numbers with zero when needed for visual alignment, can be True or False
 
 
     #########################################################################################################
 
     #The absurd mode automatically sets up a worst-case scenario game (feel free to change total_boxes)
     if player_mode == "absurd":
-        puzzle = Cat_Puzzle(mode='A', total_boxes=total_boxes, verbose=verbose)
+        puzzle = Cat_Puzzle(mode='A', total_boxes=total_boxes, verbose=verbose, zero_pad=zero_pad)
 
     #The debug mode will allow for a play-by-play analysis of what's happening in absurd mode.  
     #Consider having verbose=True as well to more fully utilize it
     elif player_mode == "debug":
-        puzzle = Cat_Puzzle(mode='A', total_boxes=total_boxes, debug=True, verbose=verbose)
+        puzzle = Cat_Puzzle(mode='A', total_boxes=total_boxes, debugging=True, verbose=verbose, zero_pad=zero_pad)
         game_not_solved = True
         while game_not_solved:
             game_not_solved = puzzle.take_turn()
@@ -29,4 +30,4 @@ if __name__ == '__main__':
 
     #This mode allows you to customize everything from the command-line
     elif player_mode == "custom":
-        puzzle = Cat_Puzzle()
+        puzzle = Cat_Puzzle(zero_pad=zero_pad)
