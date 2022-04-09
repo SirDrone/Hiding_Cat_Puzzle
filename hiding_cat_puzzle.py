@@ -8,27 +8,16 @@ from random import choice
 #What strategies can you use to find the cat and win the prize in the fewest number of days, and minimize the overall toll?
 #Normal mode lets you play the game normally, Absurd mode will take the form of the worst-case scenario.
 class Cat_Puzzle:
-    def __init__(self, mode="", total_boxes=0, debug=False, verbose=True):
+    def __init__(self, mode="", total_boxes=0, debugging=False, verbose=True, zero_pad=False):
         self.__mode = self.__get_game_mode(mode)
         if self.__mode in ['N', 'A']:
             self.__verbose = verbose if type(verbose) == bool else True
+            self.__zero_pad_enabled = zero_pad if type(zero_pad) == bool else False
             self.__total_boxes = self.__get_total_boxes(total_boxes)
             self.__prepare_game()
             if self.__verbose:
-                print("Welcome to the Cat Puzzle game!  " \
-                        "This challenge stems from a Microsoft/Google interview riddle.\n" \
-                        "The puzzle is simple.  There is a cat who loves boxes, and you, " \
-                        "as the player get a prize for picking the box with the cat in it.\n" \
-                        "However, each day, the cat will move to an adjacent box, " \
-                        "and the owner only lets you pick one box per day, " \
-                        "with a small fee charged each day you play.\n" \
-                        "What strategies can you use to find the cat " \
-                        "and win the prize consistently in the fewest number of days, " \
-                        "and minimize the overall toll?\n")
-                print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
-                if debug:
-                    print(f"(The projected optimal solution should consistently take at most {2 * self.__total_boxes - 4} turns)")
-            if not debug:
+                self.__give_intro(debugging)
+            if not debugging:
                 self.__start_game()
 
     #Ask the user which game mode they would like if not valid or provided. 'N', 'A', and 'E' are accepted
@@ -75,7 +64,23 @@ class Cat_Puzzle:
         self.__player_guesses = []
         self.__possible_cat_positions = list(range(1, self.__total_boxes + 1))
         self.__cat_position = choice(self.__possible_cat_positions)
-        self.__cat_positions.append(self.__cat_position)
+        self.__cat_positions.append(self.__zero_pad(self.__cat_position, self.__total_boxes))
+
+    #If verbosity is desired, we'll provide the player with a more formal game intro
+    def __give_intro(self, debugging):
+        print("Welcome to the Cat Puzzle game!  " \
+                "This challenge stems from a Microsoft/Google interview riddle.\n" \
+                "The puzzle is simple.  There is a cat who loves boxes, and you, " \
+                "as the player get a prize for picking the box with the cat in it.\n" \
+                "However, each day, the cat will move to an adjacent box, " \
+                "and the owner only lets you pick one box per day, " \
+                "with a small fee charged each day you play.\n" \
+                "What strategies can you use to find the cat " \
+                "and win the prize consistently in the fewest number of days, " \
+                "and minimize the overall toll?\n")
+        print(f"There are {self.__total_boxes} boxes, the cat is in one of them.  Best of luck!")
+        if debugging:
+            print(f"(The projected optimal solution should consistently take at most {2 * self.__total_boxes - 4} turns)")
 
     #Start the game
     def __start_game(self):
@@ -89,7 +94,7 @@ class Cat_Puzzle:
     #Facilitates a single guess and assessment
     def take_turn(self):
         guessed_box = self.__get_guessed_box()
-        self.__player_guesses.append(guessed_box)
+        self.__player_guesses.append(self.__zero_pad(guessed_box, self.__total_boxes))
         if guessed_box == self.__cat_position:
             if self.__mode == 'N' or len(self.__potential_cat_choices) == 1:
                 self.__game_not_solved = False
@@ -118,7 +123,7 @@ class Cat_Puzzle:
         else:
             other_move_index = (self.__potential_cat_choices.index(self.__cat_position) - 1) * -1
             self.__cat_position = self.__potential_cat_choices[other_move_index]
-        self.__cat_positions[len(self.__cat_positions) - 1] = self.__cat_position
+        self.__cat_positions[len(self.__cat_positions) - 1] = self.__zero_pad(self.__cat_position, self.__total_boxes)
 
     #This function moves the cat to an adjacent box for the upcoming turn
     def __move_cat(self):
@@ -139,7 +144,20 @@ class Cat_Puzzle:
             print(f"{choice(failure_message_intros)}  {choice(failure_message_outros)}")
         self.__potential_cat_choices = self.__get_cat_choices()
         self.__cat_position = choice(self.__potential_cat_choices)
-        self.__cat_positions.append(self.__cat_position)
+        self.__cat_positions.append(self.__zero_pad(self.__cat_position, self.__total_boxes))
+
+    #Helper function to apply zeroes to a number if the number's length is less than a given max number
+    #e.g. I want to pad "4" into "004" if the max number is 107
+    #We would zero_pad something to make debuggingging visually easier when comparing lists
+    #e.g.
+    #[17,18,19,18]  vs [17,18,19,18]
+    #[2,3,17,18]    vs [02,03,17,18]
+    def __zero_pad(self, n, m):
+        if self.__zero_pad_enabled and len(str(self.__total_boxes)) > 1:
+            return f"{''.join(map(str, [ '0' for i in range(1, len(str(m))) ]))}{n}" \
+                    if len(str(n)) < len(str(m)) else str(n)
+        else:
+            return n
 
     #An accessible function for any machine learning desires, algorithmic check-ins, etc.
     #You can use this function's outputs to help determine a one-fits-all strategy if necessary
